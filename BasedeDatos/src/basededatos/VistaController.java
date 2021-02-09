@@ -158,7 +158,7 @@ public class VistaController implements Initializable {
         boton.setOnAction((event) -> {
             
             try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("C:/Users/Rodrigo/Desktop/mp3/Ayaya.wav").getAbsoluteFile());
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Ayaya.wav").getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
