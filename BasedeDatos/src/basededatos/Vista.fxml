@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
@@ -9,27 +12,75 @@
 
 <AnchorPane id="AnchorPane" prefHeight="657.0" prefWidth="852.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="basededatos.VistaController">
    <children>
-      <Pane layoutX="24.0" layoutY="129.0" prefHeight="515.0" prefWidth="805.0" style="-fx-background-color: #66cca5;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="129.0">
-         <children>
-            <GridPane fx:id="elementos" layoutX="6.0" layoutY="3.0">
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-         </children>
-      </Pane>
+      <Button layoutX="-52.0" layoutY="-26.0" mnemonicParsing="false" />
       <Pane layoutX="24.0" layoutY="14.0" prefHeight="100.0" prefWidth="805.0" style="-fx-background-color: #de93a0;">
          <children>
             <JFXButton fx:id="nuevoArchivo" layoutX="13.0" layoutY="30.0" onAction="#nuevoArchivo" prefHeight="41.0" prefWidth="169.0" ripplerFill="WHITE" text="Nuevo Archivo" textFill="WHITE">
                <font>
                   <Font name="Century Gothic" size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
-            <JFXButton fx:id="buttonGuardar" layoutX="611.0" layoutY="30.0" onAction="#guardarExcel" prefHeight="41.0" prefWidth="169.0" ripplerFill="WHITE" text="Guardar Archivos" textFill="WHITE">
+         </children>
+      </Pane>
+      <Pane layoutX="546.0" layoutY="129.0" prefHeight="507.0" prefWidth="283.0" style="-fx-background-color: #66cca5;" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="129.0">
+         <children>
+            <GridPane fx:id="elementos" layoutX="14.0" layoutY="76.0">
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Label alignment="CENTER" layoutX="11.0" layoutY="177.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: white;" text="Indicadores">
                <font>
-                  <Font name="Century Gothic" size="16.0" />
+                  <Font name="Century Gothic" size="18.0" />
                </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="11.0" layoutY="22.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: white;" text="Categoria de Desempeño">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="11.0" layoutY="334.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: white;" text="SIMCE">
+               <font>
+                  <Font name="Century Gothic" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="buttonGuardar" layoutX="659.0" layoutY="52.0" onAction="#guardarExcel" prefHeight="48.0" prefWidth="132.0" ripplerFill="WHITE" text="Guardar Archivos" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
+            <JFXButton layoutX="659.0" layoutY="207.0" prefHeight="48.0" prefWidth="132.0" ripplerFill="WHITE" text="Guardar Archivos" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="botonGuardarSimce" layoutX="659.0" layoutY="364.0" onAction="#guardarExcelSimce" prefHeight="48.0" prefWidth="132.0" ripplerFill="WHITE" text="Guardar Archivos" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <GridPane fx:id="elementos2" layoutX="14.0" layoutY="231.0">
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane fx:id="elementos3" layoutX="14.0" layoutY="388.0">
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
          </children>
       </Pane>
    </children>

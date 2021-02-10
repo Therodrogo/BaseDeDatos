@@ -18,6 +18,7 @@ public class Escuela implements Serializable {
     public String Rendimiento= "";
     public Integer SeRepite = 0;
     
+    public int total =7;
     
     public void imprimir(){
         

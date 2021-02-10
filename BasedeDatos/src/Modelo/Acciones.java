@@ -23,16 +23,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Rodrigo -Martin
  */
 public class Acciones {
-    
-    
-    
-    
-    public void buscar(ArrayList<Escuela> escuelas1,ArrayList<Escuela> escuelas2,ArrayList<Escuela> escuelas3){
-        
-        subBuscar(escuelas1,escuelas2);
-
-    }
-    
+   
     public void subBuscar(ArrayList<Escuela> escuelas1,ArrayList<Escuela> escuelas2){
         reiniciarSeRepite(escuelas1);
         
@@ -90,8 +81,6 @@ public class Acciones {
 
             if (escuela.SeRepite==0) {
 
-
-                escuela.imprimir();
                 borrar1.add(escuela);
                 c1 +=1;
             }
