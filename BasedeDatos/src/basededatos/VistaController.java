@@ -7,12 +7,13 @@ package basededatos;
 
 
 import Modelo.Acciones;
+import Modelo.AccionesIndicador;
 import Modelo.AccionesSimce;
 import Modelo.Escuela;
+import Modelo.Indicador;
 import Modelo.Principal;
 import Modelo.Simce;
 import com.jfoenix.controls.JFXButton;
-import java.awt.Insets;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -48,20 +49,31 @@ public class VistaController implements Initializable {
 
     ArrayList<String> nombresDeArchivos= new ArrayList();
     ArrayList<String> nombresDeArchivosSimce= new ArrayList();
+    ArrayList<String> nombresDeArchivosIndicador= new ArrayList();
     
     ArrayList<Escuela>[] objetos = new ArrayList[20];
     ArrayList<Simce>[] objetosSimces = new ArrayList[20];
-    
+    ArrayList<Indicador>[] objetosIndicador = new ArrayList[20];
+  
     public ArrayList<ArrayList<Escuela>> Documentos = new ArrayList();
     public ArrayList<ArrayList<Simce>> DocumentosSimce = new ArrayList(); 
+    public ArrayList<ArrayList<Indicador>> DocumentosIndicador = new ArrayList(); 
+    
     
     int Indice =0;
     int IndiceSimce=0;
+    int IndiceIndicador =0;
     
     public int PosI = 0;
     public int PosJ = 0;
+    
     public int PosIS = 0;
     public int PosJS = 0;
+    
+    public int PosI_ID=0;
+    public int PosJ_ID=0;
+    
+    
     
     public int banderaCargar=0;
     
@@ -86,6 +98,14 @@ public class VistaController implements Initializable {
     private Pane formatoCDD;
     @FXML
     private Pane formatoId;
+    @FXML
+    private JFXButton buttonGuardarIndicador;
+    @FXML
+    private GridPane elementosComparar;
+    @FXML
+    private JFXButton abrirArchivo;
+    @FXML
+    private JFXButton guardarComparar;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,19 +142,24 @@ public class VistaController implements Initializable {
                     }
                     
                 }
-                
+                if (principal.isId) {
+                    if (validarName(nombresDeArchivosIndicador, nombreFile)) {
+                        agregarButtonIndicador(nombreFile);
+                        guardarTxtIndicador(principal.indicadores, nombreFile);
+                    }
+                }
                 //Guardar TXT de Simce
                 if (principal.isSimce) {
                     if (validarName(nombresDeArchivosSimce, nombreFile)) {
                         agregarButtonSimce(nombreFile);
-                    guardarTxtSimce(principal.simces, nombreFile);
+                        guardarTxtSimce(principal.simces, nombreFile);
                     }
                     
                 }
                 
-
                 principal.escuelas.clear();
                 principal.simces.clear();
+                principal.indicadores.clear();
                 
                 nombreArchivo="";
 
@@ -159,13 +184,10 @@ public class VistaController implements Initializable {
 
         if (ingresar==1) {
             archivosName.add(nombre);
-            banderaCargar=1;
-            
-            return true;
-            
+
+            return true; 
         }else{
             mostrarAlertError();
-            banderaCargar=0;
             
             return false;
         }
@@ -221,19 +243,6 @@ public class VistaController implements Initializable {
         boton.textFillProperty().set(Paint.valueOf("white"));
         boton.setStyle("-fx-background-color: #5CDB2C;");
         boton.setPrefWidth(131);
-        
-//        boton.setOnAction((event) -> {
-//            
-//            try {
-//            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Ayaya.wav").getAbsoluteFile());
-//            Clip clip = AudioSystem.getClip();
-//            clip.open(audioInputStream);
-//            clip.start();
-//           } catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
-//             System.out.println("Error al reproducir el sonido.");
-//           }
-//            
-//        });
 
         elementos3.add(boton, PosIS, PosJS);
 
@@ -319,20 +328,47 @@ public class VistaController implements Initializable {
         }
     }
     
-    public void borrarElementoSimce(ArrayList<Simce> simces){
+    public void borrarElementoSimce(ArrayList<Simce> simces,ArrayList<ArrayList<Simce>> DocumentosSimceNUEVO){
         
-        if (DocumentosSimce.size()>=2) {
+        if (DocumentosSimceNUEVO.size()>=2) {
             
             AccionesSimce acciones = new AccionesSimce ();
             
-            for (int i = 0; i < DocumentosSimce.size(); i++) {
+            for (int i = 0; i < DocumentosSimceNUEVO.size(); i++) {
                 try {
                     ArrayList<Simce> borrar = new ArrayList();
                     System.out.println(simces.size()+"||||");
                     
-                    acciones.subBuscar(simces, (ArrayList<Simce>)DocumentosSimce.get(i));
+                    acciones.subBuscar(simces, (ArrayList<Simce>)DocumentosSimceNUEVO.get(i));
                     acciones.buscarRepetidas(simces,borrar);
                     acciones.borrar(simces, borrar);
+                    
+                } catch (Exception e) {
+                    System.out.println("Borrado completado");
+                }
+                
+            }
+           
+        }
+        else{
+            
+            System.out.println("FALTAN ELEMENTOS");
+        }
+    }
+    public void borrarElementoIndicador(ArrayList<Indicador> indicadores,ArrayList<ArrayList<Indicador>> documentos){
+        
+        if (documentos.size()>=2) {
+            
+            AccionesIndicador acciones = new AccionesIndicador ();
+            
+            for (int i = 0; i < documentos.size(); i++) {
+                try {
+                    ArrayList<Indicador> borrar = new ArrayList();
+                    System.out.println(indicadores.size()+"||||");
+                    
+                    acciones.subBuscar(indicadores, (ArrayList<Indicador>)documentos.get(i));
+                    acciones.buscarRepetidas(indicadores,borrar);
+                    acciones.borrar(indicadores, borrar);
                     
                 } catch (Exception e) {
                     System.out.println("Borrado completado");
@@ -346,7 +382,7 @@ public class VistaController implements Initializable {
         }
     }
     
-    
+    //Guarda TXT archivo
     public void guardarTxt(ArrayList<Escuela> escuelas,String nombre) throws FileNotFoundException, IOException{
 
         ObjectOutputStream salida = new ObjectOutputStream( new FileOutputStream(nombre+".txt"));
@@ -359,6 +395,13 @@ public class VistaController implements Initializable {
         ObjectOutputStream salida = new ObjectOutputStream( new FileOutputStream(nombre+".txt"));
         
         salida.writeObject(simces);
+        salida.close();
+    }
+    public void guardarTxtIndicador(ArrayList<Indicador> indicadores,String nombre) throws FileNotFoundException, IOException{
+
+        ObjectOutputStream salida = new ObjectOutputStream( new FileOutputStream(nombre+".txt"));
+        
+        salida.writeObject(indicadores);
         salida.close();
     }
     
@@ -374,6 +417,27 @@ public class VistaController implements Initializable {
                 Documentos.add(objetos[Indice]);
                 
                 Indice = Indice + 1;
+
+                entrada.close();
+            } catch (Exception e) {
+                System.out.println(e.getCause());
+                System.out.println("SE CAYP ###21321");
+            } 
+        }
+    
+    }
+    public void cargarTxtIndicador(ArrayList<String> nombresDeArchivos) throws FileNotFoundException, IOException, ClassNotFoundException{
+        for (int i = 0; i < nombresDeArchivos.size(); i++) {
+            try {
+                System.out.println(nombresDeArchivos.get(i)+".txt");
+            
+                ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(nombresDeArchivos.get(i)+".txt"));
+            
+                objetosIndicador[IndiceIndicador] = (ArrayList) entrada.readObject();
+            
+                DocumentosIndicador.add(objetosIndicador[IndiceIndicador]);
+                
+                IndiceIndicador = IndiceIndicador + 1;
 
                 entrada.close();
             } catch (Exception e) {
@@ -406,7 +470,89 @@ public class VistaController implements Initializable {
         }
     
     }
+    ArrayList<Escuela> compararEscuela = new ArrayList();
+    ArrayList<Simce> compararSimce = new ArrayList();
+    ArrayList<Indicador> compararIndicador = new ArrayList();
+    
+    public void cargarTxtComparar(ArrayList<String> nombresDeArchivos) throws FileNotFoundException, IOException, ClassNotFoundException{
+        try {
+            System.out.println(nombresDeArchivos.size());
 
+            ObjectInputStream entrada1 = new ObjectInputStream(new FileInputStream(nombresDeArchivos.get(0)+".txt"));
+            ObjectInputStream entrada2 = new ObjectInputStream(new FileInputStream(nombresDeArchivos.get(1)+".txt"));
+            ObjectInputStream entrada3 = new ObjectInputStream(new FileInputStream(nombresDeArchivos.get(2)+".txt"));
+
+            compararEscuela =(ArrayList<Escuela>) entrada1.readObject();
+            compararSimce = (ArrayList<Simce>) entrada2.readObject();
+            compararIndicador = (ArrayList<Indicador>) entrada3.readObject();
+            
+            entrada1.close();
+            entrada2.close();
+            entrada3.close();
+
+
+        } catch (Exception e) {
+            System.out.println("Se cayo");
+        } 
+    }
+    
+    @FXML
+    private void guardarExcel_Indicador(ActionEvent event) {
+        try {
+            buttonGuardarIndicador.setDisable(true);
+            
+            FileChooser file = new FileChooser();
+            File abre = file.showSaveDialog(null);
+            
+            AccionesIndicador accionesIndicador = new AccionesIndicador();
+            
+            if (!"null".equals(abre.toString())) {
+                
+                cargarTxtIndicador(nombresDeArchivosIndicador);
+                
+                //Borrar Weas en blanco
+                ArrayList<ArrayList<Indicador>> DocumentosIndicadorNUEVO = new ArrayList(); 
+                
+                
+                DocumentosIndicadorNUEVO = accionesIndicador.elimnarVacio(DocumentosIndicador);
+                
+                System.out.println("PASO ELIMINAR VACIO");
+                
+       
+                
+                //Borrar Elementos que se repiten
+                for (int i = 0; i < DocumentosIndicadorNUEVO.size(); i++) {
+                    System.out.println(DocumentosIndicadorNUEVO.get(i));
+                    borrarElementoIndicador(DocumentosIndicadorNUEVO.get(i),DocumentosIndicadorNUEVO);
+                }
+                
+                //Exportar Excel
+                for (int i = 0; i < DocumentosIndicadorNUEVO.size(); i++) {
+                    accionesIndicador.exportarExcel(DocumentosIndicadorNUEVO.get(i),abre.toString()+nombresDeArchivosIndicador.get(i));
+
+                }
+
+                buttonGuardarIndicador.setDisable(false);
+
+                elementos2.getChildren().clear();
+                DocumentosIndicador.clear();
+                nombresDeArchivosIndicador.clear();
+                
+                PosI_ID=0;
+                PosJ_ID=0;
+            }
+           
+                 
+            
+        } catch (Exception e) {
+            buttonGuardarIndicador.setDisable(false);
+        }
+        
+        
+        
+        
+        
+    }
     @FXML
     private void guardarExcelSimce(ActionEvent event) {
         try {
@@ -415,19 +561,24 @@ public class VistaController implements Initializable {
             FileChooser file = new FileChooser();
             File abre = file.showSaveDialog(null);
             AccionesSimce accionesSimce = new AccionesSimce();
+            
             if (!"null".equals(abre.toString())) {
                 
                 cargarTxtSimce(nombresDeArchivosSimce);
                 
+                ArrayList<ArrayList<Simce>> DocumentosSimceNUEVO = new ArrayList();
+                
+                DocumentosSimceNUEVO = accionesSimce.elimnarVacio(DocumentosSimce);
+
                 //Borrar Elementos que se repiten
-                for (int i = 0; i < DocumentosSimce.size(); i++) {
-                    System.out.println(DocumentosSimce.get(i));
-                    borrarElementoSimce(DocumentosSimce.get(i));
+                for (int i = 0; i < DocumentosSimceNUEVO.size(); i++) {
+                    System.out.println(DocumentosSimceNUEVO.get(i));
+                    borrarElementoSimce(DocumentosSimceNUEVO.get(i),DocumentosSimceNUEVO);
                 }
                 
                 //Exportar Excel
-                for (int i = 0; i < DocumentosSimce.size(); i++) {
-                    accionesSimce.exportarExcel(DocumentosSimce.get(i),abre.toString()+nombresDeArchivosSimce.get(i));
+                for (int i = 0; i < DocumentosSimceNUEVO.size(); i++) {
+                    accionesSimce.exportarExcel(DocumentosSimceNUEVO.get(i),abre.toString()+nombresDeArchivosSimce.get(i));
 
                 }
 
@@ -527,5 +678,133 @@ public class VistaController implements Initializable {
         formatoId.setVisible(false);
         Id=true;
     }
+
+    private void agregarButtonIndicador(String nombreFile) {
+        JFXButton boton = new JFXButton(nombreArchivo);
+        boton.textFillProperty().set(Paint.valueOf("white"));
+        boton.setStyle("-fx-background-color: red;");
+        boton.setPrefWidth(131);
+
+        elementos2.add(boton, PosI_ID, PosJ_ID);
+        
+        PosI_ID= PosI_ID+1;
+        if (PosI_ID==4) {
+            PosI_ID=0;
+            PosJ_ID+=1;
+        }
+    }
+
+
+    public ArrayList<String> nombresComparar = new ArrayList();
+    
+    @FXML
+    private void abrirElemento(ActionEvent event) {
+        
+        try {
+            abrirArchivo.setDisable(true);
+            FileChooser file = new FileChooser();
+            file.getExtensionFilters().addAll(
+            new ExtensionFilter("Excel", "*.xlsx"));
+            
+            File abre = file.showOpenDialog(null);
+            System.out.println(abre);
+
+            if (!"null".equals(abre.toString())) {
+                
+                abrirArchivo.setDisable(false);
+                
+                String nombreFile = sacarName(abre);
+                
+
+                //Si el nombre es valido se carga
+                
+                principal.abrirExcel(abre);
+
+                //Guardar TXT de CDD
+                if (principal.isCDD) {
+                    if (validarName(nombresComparar, nombreFile)) {
+                        agregarButtonComparar(nombreFile);
+                        guardarTxt(principal.escuelas, nombreFile);
+                    }
+                    
+                }
+                if (principal.isId) {
+                    if (validarName(nombresComparar, nombreFile)) {
+                        agregarButtonComparar(nombreFile);
+                        guardarTxtIndicador(principal.indicadores, nombreFile);
+                    }
+                }
+                //Guardar TXT de Simce
+                if (principal.isSimce) {
+                    if (validarName(nombresComparar, nombreFile)) {
+                        agregarButtonComparar(nombreFile);
+                        guardarTxtSimce(principal.simces, nombreFile);
+                    }
+                    
+                }
+                
+                principal.escuelas.clear();
+                principal.simces.clear();
+                principal.indicadores.clear();
+                
+                nombreArchivo="";
+
+            }
+            
+        } catch (Exception e) {
+            abrirArchivo.setDisable(false);
+        }
+    
+        
+    }
+    int posI =0;
+    int posJ =0;
+       
+    public void agregarButtonComparar(String nombre){
+        
+        JFXButton boton = new JFXButton(nombre);
+        boton.textFillProperty().set(Paint.valueOf("white"));
+        boton.setStyle("-fx-background-color: #5CDB2C;");
+        boton.setPrefWidth(131);
+
+        elementosComparar.add(boton, posI, posJ);
+
+        posI= posI+1;
+        if (posI==4) {
+            posI=0;
+            posJ+=1;
+        }
+        
+    }
+
+    @FXML
+    private void guardarComparaciones(ActionEvent event) {
+        try {
+            
+            guardarComparar.setDisable(true);
+
+            FileChooser file = new FileChooser();
+            File abre = file.showSaveDialog(null);
+            AccionesSimce accionesSimce = new AccionesSimce();
+
+            if (!"null".equals(abre.toString())) {
+
+                cargarTxtComparar(nombresComparar);
+                
+            }
+            
+            
+            
+            
+            
+            
+            
+        } catch (Exception e) {
+            buttonGuardarIndicador.setDisable(false);
+        }
+        
+    }
+
+
     
 }

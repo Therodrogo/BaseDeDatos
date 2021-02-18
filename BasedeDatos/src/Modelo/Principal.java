@@ -32,6 +32,7 @@ public class Principal implements Serializable {
     public boolean isCDD = false;
     public boolean isId=false;
     
+    
     public void abrirExcel(File fileName){
 
         List cellData= new ArrayList();
@@ -165,6 +166,65 @@ public class Principal implements Serializable {
             simce.prom_mate4b_rbd = stringCellValue;
         }
     }
+    
+    public void indicadorDocument(Indicador indicador, int j, String stringCellValue){
+
+        if (indices[0]==j) {
+            indicador.Agno = stringCellValue;
+        }
+        if (indices[1]==j) {
+            indicador.Grado = stringCellValue;
+        }
+        if (indices[2]==j) {
+            try {
+                Double temp = Double.parseDouble(stringCellValue);
+                Integer temp2 = temp.intValue();
+
+                indicador.RBD = temp2;
+            } catch (Exception e) {
+            }
+        }
+        if (indices[3]==j) {
+            indicador.Ind_am= stringCellValue;
+        }
+        if (indices[4]==j) {
+            indicador.Ind_cc = stringCellValue;
+        }
+        if (indices[5]==j) {
+            indicador.Ind_hv = stringCellValue;
+        }
+        if (indices[6]==j) {
+            indicador.Ind_pf = stringCellValue;
+        }
+        
+        
+        
+    }
+    public void buscarIndicesIndicador(int j , String stringCellValue){
+        if (stringCellValue.equals("agno")) {
+            indices[0] = j;
+        }
+        if (stringCellValue.equals("grado")) {
+            indices[1] = j;
+        }
+        if (stringCellValue.equals("rbd")) {
+            indices[2] = j;
+        }
+        if (stringCellValue.equals("ind_am") ||stringCellValue.equals("ind_am_rbd") ) {
+            indices[3] = j;
+        }
+        if (stringCellValue.equals("ind_cc") || stringCellValue.equals("ind_cc_rbd")) {
+            indices[4] = j;
+        }
+        if (stringCellValue.equals("ind_hv") || stringCellValue.equals("ind_hv_rbd")) {
+            indices[5] = j;
+        }
+        if (stringCellValue.equals("ind_pf") || stringCellValue.equals("ind_pf_rbd")) {
+            indices[6] = j;
+        }
+        
+        
+    }
     public void buscarIndices( int j, String stringCellValue){
         
         if (stringCellValue.equals("agno")) {
@@ -173,7 +233,7 @@ public class Principal implements Serializable {
         if (stringCellValue.equals("grado")) {
             indices[1] = j;
         }
-        if (stringCellValue.equals("rbd")) {
+        if (stringCellValue.equals("rbd") || stringCellValue.equals("RBD")) {
             indices[2] = j;
         }
         if (stringCellValue.equals("dvrbd")) {
@@ -228,10 +288,6 @@ public class Principal implements Serializable {
         
     }
     
-    public void buscarIndicadoresId(){
-        
-    }
-    
     private void obtener(List cellDataList){//okey
         
         
@@ -241,6 +297,8 @@ public class Principal implements Serializable {
 
             Escuela escuela = new Escuela(); 
             Simce simce = new Simce();
+            Indicador indicador = new Indicador();
+            
             for (int j = 0; j < cellTempList.size(); j++) {//okey
 
                 XSSFCell hssfCell = (XSSFCell) cellTempList.get(j);//okey
@@ -253,6 +311,8 @@ public class Principal implements Serializable {
                     if (stringCellValue.equals("ind_am")) {
                         isId = true;
                         
+                        buscarIndicesIndicador(j, stringCellValue);
+                        
                         isCDD = false;
                         isSimce =false;
                     }
@@ -264,7 +324,10 @@ public class Principal implements Serializable {
                     }
                     if (stringCellValue.equals("prom_mate4b_rbd")) {
                         isSimce = true;
+                        
                         buscarIndices(j, stringCellValue);
+                        
+                        
                         isCDD = false;
                         isId=false;
                         
@@ -286,7 +349,10 @@ public class Principal implements Serializable {
                     sinceDocument(simce, j, stringCellValue);
                 }
                 if (isId || i==0) {
-                    
+                    if (i==0) {
+                        buscarIndicesIndicador(j, stringCellValue);
+                    }
+                    indicadorDocument(indicador, j, stringCellValue);
                 }
                 
             }
@@ -297,6 +363,9 @@ public class Principal implements Serializable {
             }
             if (isSimce || i==0) {
                 simces.add(simce);
+            }
+            if (isId || i==0) {
+                indicadores.add(indicador);
             }
         }
          

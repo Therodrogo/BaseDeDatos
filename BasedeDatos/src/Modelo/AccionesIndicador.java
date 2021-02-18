@@ -22,28 +22,34 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Rodrigo -Martin
  */
-public class AccionesSimce {
-   
-    public ArrayList<ArrayList<Simce>> elimnarVacio(ArrayList<ArrayList<Simce>> documento){
+public class AccionesIndicador {
+    
+    public ArrayList<ArrayList<Indicador>> elimnarVacio(ArrayList<ArrayList<Indicador>> documento){
         
-        ArrayList<ArrayList<Simce>> documentoNuevo = new ArrayList();
-
-        for (ArrayList<Simce> simces : documento) {
+        ArrayList<ArrayList<Indicador>> documentoNuevo = new ArrayList();
+        
+        
+        
+        
+        for (ArrayList<Indicador> indicadores : documento) {
             
-            ArrayList<Simce> nuevo = new ArrayList();
+            ArrayList<Indicador> nuevo = new ArrayList();
             
-            for (Simce simce: simces) {
+            for (Indicador indicador: indicadores) {
                 
-                if (!simce.nalu_lect4b_rbd.equals("") && !simce.nalu_lect4b_rbd.equals("No significativa")) {
+                if (!indicador.Agno.equals("")) {
 
-                    if(!simce.nalu_mate4b_rbd.equals("") && !simce.nalu_mate4b_rbd.equals("No significativa")){
+                    if(!indicador.Grado.equals("")){
 
-                         if (!simce.prom_lect4b_rbd.equals("") && !simce.prom_lect4b_rbd.equals("No significativa")) {
+                         if (!indicador.Ind_am.equals("")) {
 
-                            if(!simce.prom_mate4b_rbd.equals("") && !simce.prom_mate4b_rbd.equals("No significativa")){
-                                
-                                nuevo.add(simce);
-               
+                            if(!indicador.Ind_cc.equals("")){
+                                if(!indicador.Ind_hv.equals("")){
+                                    if (!indicador.Ind_pf.equals("")) {
+                                    
+                                        nuevo.add(indicador);
+                                    }
+                                }
                             }
                         }
                         
@@ -56,22 +62,20 @@ public class AccionesSimce {
         }
      
         documento.clear();
-        
         return documentoNuevo;
         
     }
     
-    public void subBuscar(ArrayList<Simce> escuelas1,ArrayList<Simce> escuelas2){
+    public void subBuscar(ArrayList<Indicador> escuelas1,ArrayList<Indicador> escuelas2){
         reiniciarSeRepite(escuelas1);
         
         for (int i = 0; i < escuelas1.size(); i++) {
             
-            Simce escuela1 = (Simce) escuelas1.get(i);
+            Indicador escuela1 = (Indicador) escuelas1.get(i);
             
             for (int j = 0; j < escuelas2.size(); j++) {
                 
-                Simce escuela2 = (Simce) escuelas2.get(j);
-                //System.out.println(escuela1.RBD+" ||| "+ escuela2.RBD);
+                Indicador escuela2 = (Indicador) escuelas2.get(j);
                 
                 if (Objects.equals(escuela1.RBD, escuela2.RBD)) {
                     escuela1.SeRepite += 1;
@@ -89,15 +93,15 @@ public class AccionesSimce {
         }
     }
     
-    public void borrar(ArrayList<Simce> escuelas, ArrayList<Simce> escuelasBorrar ){
+    public void borrar(ArrayList<Indicador> escuelas, ArrayList<Indicador> escuelasBorrar ){
         
         for (int i = 0; i < escuelas.size(); i++) {
             
-            Simce escuela =(Simce)  escuelas.get(i);
+            Indicador escuela =(Indicador)  escuelas.get(i);
             
             for (int j = 0; j < escuelasBorrar.size(); j++) {
             
-                    Simce escuelaBorrar = (Simce)  escuelasBorrar.get(j);
+                    Indicador escuelaBorrar = (Indicador)  escuelasBorrar.get(j);
                 
                     if (Objects.equals(escuela.RBD, escuelaBorrar.RBD)) {
 
@@ -112,9 +116,9 @@ public class AccionesSimce {
         }
     }
 
-    public void buscarRepetidas(ArrayList<Simce> escuelas, ArrayList<Simce> borrar1) {
+    public void buscarRepetidas(ArrayList<Indicador> escuelas, ArrayList<Indicador> borrar1) {
         int c1=-1;
-        for (Simce escuela: escuelas) {
+        for (Indicador escuela: escuelas) {
 
             if (escuela.SeRepite==0) {
 
@@ -125,25 +129,25 @@ public class AccionesSimce {
         
     }
     
-    public void imprimirDocumentoCompleto(ArrayList<Simce> escuelas){
-
-        for (Simce escuela: escuelas) {
+    public void imprimirDocumentoCompleto(ArrayList<Indicador> escuelas){
+        
+        for (Indicador escuela: escuelas) {
 
             escuela.imprimir();
 
         }
     }
     
-    public void imprimirBorrado(ArrayList<Simce> escuelas){
+    public void imprimirBorrado(ArrayList<Indicador> escuelas){
         
-        for (Simce escuela: escuelas) {
+        for (Indicador escuela: escuelas) {
             if (escuela.SeRepite==0) {
                 escuela.imprimir();
             }
         }
     }
 
-    public void exportarExcel(ArrayList<Simce> escuelas,String direccion) {
+    public void exportarExcel(ArrayList<Indicador> escuelas,String direccion) {
         
         String hoja="Hoja1";
 
@@ -157,18 +161,19 @@ public class AccionesSimce {
         //generar los datos para el documento
         for (int i = 0; i < escuelas.size(); i++) {
             try {
-                Simce escuela = (Simce) escuelas.get(i);
+                Indicador escuela = (Indicador) escuelas.get(i);
 
                 XSSFRow row= hoja1.createRow(i);//se crea las filas
-                for (int j = 0; j < 19; j++) {
+                for (int j = 0; j < 7; j++) {
 
                     XSSFCell cell= row.createCell(j);//se crea las celdas para la cabecera, junto con la posición
                     cell.setCellStyle(style); // se añade el style crea anteriormente 
+                    
                     if (j==0) {
-                        cell.setCellValue(escuela.agno) ;
+                        cell.setCellValue(escuela.Agno);
                     }
                     if (j==1) {
-                        cell.setCellValue(escuela.grado) ;
+                        cell.setCellValue(escuela.Grado);
                     }
                     if (j==2) {
                         if (i==0) {
@@ -179,53 +184,19 @@ public class AccionesSimce {
                         }
                     }
                     if (j==3) {
-                        cell.setCellValue(escuela.dvrbd) ;
+                        cell.setCellValue(escuela.Ind_am);
                     }
                     if (j==4) {
-                        cell.setCellValue(escuela.nom_rbd);
+                        cell.setCellValue(escuela.Ind_cc);
                     }
                     if (j==5) {
-                        cell.setCellValue(escuela.cod_reg_rbd);
+                        cell.setCellValue(escuela.Ind_hv);
                     }
                     if (j==6) {
-                        cell.setCellValue(escuela.nom_reg_rbd);
+                        cell.setCellValue(escuela.Ind_pf);
                     }
-                    if (j==7) {
-                        cell.setCellValue(escuela.cod_pro_rbd);
-                    }
-                    if (j==8) {
-                        cell.setCellValue(escuela.nom_pro_rbd);
-                    }
-                    if (j==9) {
-                        cell.setCellValue(escuela.cod_com_rbd);
-                    }
-                    if (j==10) {
-                        cell.setCellValue(escuela.nom_com_rbd);
-                    }
-                    if (j==11) {
-                        cell.setCellValue(escuela.cod_depe1);
-                    }
-                    if (j==12) {
-                        cell.setCellValue(escuela.cod_depe2);
-                    }
-                    if (j==13) {
-                        cell.setCellValue(escuela.cod_grupo);
-                    }
-                    if (j==14) {
-                        cell.setCellValue(escuela.cod_rural_rbd);
-                    }
-                    if (j==15) {
-                        cell.setCellValue(escuela.nalu_lect4b_rbd);
-                    }
-                    if (j==16) {
-                        cell.setCellValue(escuela.nalu_mate4b_rbd);
-                    }
-                    if (j==17) {
-                        cell.setCellValue(escuela.prom_lect4b_rbd);
-                    }
-                    if (j==18) {
-                        cell.setCellValue(escuela.prom_mate4b_rbd);
-                    }
+
+
                 }
             } catch (Exception e) {
             }
@@ -233,8 +204,7 @@ public class AccionesSimce {
 
         File file;
         file = new File(direccion+".xlsx");
-        try {	
-            FileOutputStream fileOuS = new FileOutputStream(file);				
+        try (FileOutputStream fileOuS = new FileOutputStream(file)){						
             if (file.exists()) {// si el archivo existe se elimina
                     file.delete();
                     System.out.println("Archivo eliminado");
@@ -251,9 +221,9 @@ public class AccionesSimce {
         }
     }
     
-    public void reiniciarSeRepite(ArrayList<Simce> escuelas){
+    public void reiniciarSeRepite(ArrayList<Indicador> escuelas){
         
-        for (Simce escuela: escuelas) {
+        for (Indicador escuela: escuelas) {
             escuela.SeRepite=0;
         }
         
