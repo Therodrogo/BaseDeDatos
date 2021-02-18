@@ -34,7 +34,6 @@ public class Acciones {
             for (int j = 0; j < escuelas2.size(); j++) {
                 
                 Escuela escuela2 = (Escuela) escuelas2.get(j);
-                //System.out.println(escuela1.RBD+" ||| "+ escuela2.RBD);
                 
                 if (Objects.equals(escuela1.RBD, escuela2.RBD)) {
                     escuela1.SeRepite += 1;
@@ -85,12 +84,10 @@ public class Acciones {
                 c1 +=1;
             }
         }
-        System.out.println("Cantidad de Repetidas: "+c1);
         
     }
     
     public void imprimirDocumentoCompleto(ArrayList<Escuela> escuelas){
-        System.out.println("Nueva Lista   ");
         
         for (Escuela escuela: escuelas) {
 
@@ -141,15 +138,18 @@ public class Acciones {
                         cell.setCellValue(escuela.Nombre);
                     }
                     if (j==2) {
-                        cell.setCellValue(escuela.Comuna);
+                        cell.setCellValue(escuela.Region);
                     }
                     if (j==3) {
-                        cell.setCellValue(escuela.Dependencia);
+                        cell.setCellValue(escuela.Comuna);
                     }
                     if (j==4) {
-                        cell.setCellValue(escuela.Matricula);
+                        cell.setCellValue(escuela.Dependencia);
                     }
                     if (j==5) {
+                        cell.setCellValue(escuela.Matricula);
+                    }
+                    if (j==6) {
                         cell.setCellValue(escuela.Rendimiento);
                     }
 

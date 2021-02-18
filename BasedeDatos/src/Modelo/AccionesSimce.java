@@ -85,13 +85,11 @@ public class AccionesSimce {
                 c1 +=1;
             }
         }
-        System.out.println("Cantidad de Repetidas: "+c1);
         
     }
     
     public void imprimirDocumentoCompleto(ArrayList<Simce> escuelas){
-        System.out.println("Nueva Lista   ");
-        
+
         for (Simce escuela: escuelas) {
 
             escuela.imprimir();
@@ -125,11 +123,17 @@ public class AccionesSimce {
                 Simce escuela = (Simce) escuelas.get(i);
 
                 XSSFRow row= hoja1.createRow(i);//se crea las filas
-                for (int j = 0; j < 41; j++) {
+                for (int j = 0; j < 19; j++) {
 
                     XSSFCell cell= row.createCell(j);//se crea las celdas para la cabecera, junto con la posición
                     cell.setCellStyle(style); // se añade el style crea anteriormente 
                     if (j==0) {
+                        cell.setCellValue(escuela.agno) ;
+                    }
+                    if (j==1) {
+                        cell.setCellValue(escuela.grado) ;
+                    }
+                    if (j==2) {
                         if (i==0) {
                             cell.setCellValue("RBD") ;
                         }
@@ -137,31 +141,52 @@ public class AccionesSimce {
                             cell.setCellValue(escuela.RBD) ;
                         }
                     }
-                    if (j==1) {
-                        cell.setCellValue(escuela.nom_rbd);
-                    }
-                    if (j==2) {
-                        cell.setCellValue(escuela.cod_depe1);
-                    }
                     if (j==3) {
-                        cell.setCellValue(escuela.cod_depe2);
+                        cell.setCellValue(escuela.dvrbd) ;
                     }
                     if (j==4) {
-                        cell.setCellValue(escuela.cod_grupo);
+                        cell.setCellValue(escuela.nom_rbd);
                     }
                     if (j==5) {
-                        cell.setCellValue(escuela.cod_rural_rbd);
+                        cell.setCellValue(escuela.cod_reg_rbd);
                     }
                     if (j==6) {
-                        cell.setCellValue(escuela.nalu_lect4b_rbd);
+                        cell.setCellValue(escuela.nom_reg_rbd);
                     }
                     if (j==7) {
-                        cell.setCellValue(escuela.nalu_mate4b_rbd);
+                        cell.setCellValue(escuela.cod_pro_rbd);
                     }
                     if (j==8) {
-                        cell.setCellValue(escuela.prom_lect4b_rbd);
+                        cell.setCellValue(escuela.nom_pro_rbd);
                     }
                     if (j==9) {
+                        cell.setCellValue(escuela.cod_com_rbd);
+                    }
+                    if (j==10) {
+                        cell.setCellValue(escuela.nom_com_rbd);
+                    }
+                    if (j==11) {
+                        cell.setCellValue(escuela.cod_depe1);
+                    }
+                    if (j==12) {
+                        cell.setCellValue(escuela.cod_depe2);
+                    }
+                    if (j==13) {
+                        cell.setCellValue(escuela.cod_grupo);
+                    }
+                    if (j==14) {
+                        cell.setCellValue(escuela.cod_rural_rbd);
+                    }
+                    if (j==15) {
+                        cell.setCellValue(escuela.nalu_lect4b_rbd);
+                    }
+                    if (j==16) {
+                        cell.setCellValue(escuela.nalu_mate4b_rbd);
+                    }
+                    if (j==17) {
+                        cell.setCellValue(escuela.prom_lect4b_rbd);
+                    }
+                    if (j==18) {
                         cell.setCellValue(escuela.prom_mate4b_rbd);
                     }
                 }

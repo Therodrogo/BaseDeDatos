@@ -1,53 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="657.0" prefWidth="852.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="basededatos.VistaController">
+<AnchorPane id="AnchorPane" prefHeight="610.0" prefWidth="830.0" style="-fx-background-color: #1f1e24;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="basededatos.VistaController">
    <children>
       <Button layoutX="-52.0" layoutY="-26.0" mnemonicParsing="false" />
-      <Pane layoutX="24.0" layoutY="14.0" prefHeight="100.0" prefWidth="805.0" style="-fx-background-color: #de93a0;">
+      <Pane layoutX="10.0" layoutY="88.0" prefHeight="507.0" prefWidth="809.0" style="-fx-background-color: #2f2f39;">
          <children>
-            <JFXButton fx:id="nuevoArchivo" layoutX="13.0" layoutY="30.0" onAction="#nuevoArchivo" prefHeight="41.0" prefWidth="169.0" ripplerFill="WHITE" text="Nuevo Archivo" textFill="WHITE">
-               <font>
-                  <Font name="Century Gothic" size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-         </children>
-      </Pane>
-      <Pane layoutX="546.0" layoutY="129.0" prefHeight="507.0" prefWidth="283.0" style="-fx-background-color: #66cca5;" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="129.0">
-         <children>
-            <GridPane fx:id="elementos" layoutX="14.0" layoutY="76.0">
+            <GridPane fx:id="elementos" layoutX="11.0" layoutY="62.0">
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Label alignment="CENTER" layoutX="11.0" layoutY="177.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: white;" text="Indicadores">
+            <Label alignment="CENTER" layoutX="11.0" layoutY="177.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: #3f3f4b;" text="Indicadores" textFill="#bdbdbd">
                <font>
                   <Font name="Century Gothic" size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="11.0" layoutY="22.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: white;" text="Categoria de Desempeño">
+            <Label alignment="CENTER" layoutX="11.0" layoutY="22.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: #3f3f4b;" text="Categoria de Desempeño" textFill="#bdbdbd">
                <font>
                   <Font name="Century Gothic" size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="11.0" layoutY="334.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: white;" text="SIMCE">
+            <Label alignment="CENTER" layoutX="11.0" layoutY="334.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: #3f3f4b;" text="SIMCE" textFill="#bdbdbd">
                <font>
                   <Font name="Century Gothic" size="18.0" />
                </font>
             </Label>
-            <JFXButton fx:id="buttonGuardar" layoutX="659.0" layoutY="52.0" onAction="#guardarExcel" prefHeight="48.0" prefWidth="132.0" ripplerFill="WHITE" text="Guardar Archivos" textFill="WHITE">
+            <JFXButton fx:id="buttonGuardar" layoutX="661.0" layoutY="62.0" onAction="#guardarExcel" prefHeight="48.0" prefWidth="132.0" ripplerFill="WHITE" style="-fx-background-color: #cc3960;" text="Guardar Archivos" textFill="WHITE">
                <font>
                   <Font name="Century Gothic" size="13.0" />
                </font>
@@ -55,7 +46,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="659.0" layoutY="207.0" prefHeight="48.0" prefWidth="132.0" ripplerFill="WHITE" text="Guardar Archivos" textFill="WHITE">
+            <JFXButton layoutX="661.0" layoutY="217.0" prefHeight="48.0" prefWidth="132.0" ripplerFill="WHITE" style="-fx-background-color: #cc3960;" text="Guardar Archivos" textFill="WHITE">
                <font>
                   <Font name="Century Gothic" size="13.0" />
                </font>
@@ -63,7 +54,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="botonGuardarSimce" layoutX="659.0" layoutY="364.0" onAction="#guardarExcelSimce" prefHeight="48.0" prefWidth="132.0" ripplerFill="WHITE" text="Guardar Archivos" textFill="WHITE">
+            <JFXButton fx:id="botonGuardarSimce" layoutX="661.0" layoutY="374.0" onAction="#guardarExcelSimce" prefHeight="48.0" prefWidth="132.0" ripplerFill="WHITE" style="-fx-background-color: #cc3960;" text="Guardar Archivos" textFill="WHITE">
                <font>
                   <Font name="Century Gothic" size="13.0" />
                </font>
@@ -71,17 +62,119 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <GridPane fx:id="elementos2" layoutX="14.0" layoutY="231.0">
+            <GridPane fx:id="elementos2" layoutX="11.0" layoutY="217.0">
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </GridPane>
-            <GridPane fx:id="elementos3" layoutX="14.0" layoutY="388.0">
+            <GridPane fx:id="elementos3" layoutX="11.0" layoutY="374.0">
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </GridPane>
+            <JFXButton buttonType="RAISED" layoutX="702.0" layoutY="120.0" onAction="#verFormatoCDD" style="-fx-background-color: #669ef7;" text="Ayuda" textFill="WHITE" />
+            <JFXButton buttonType="RAISED" layoutX="702.0" layoutY="275.0" onAction="#verFormatoId" style="-fx-background-color: #669ef7;" text="Ayuda" textFill="WHITE" />
+            <JFXButton buttonType="RAISED" layoutX="702.0" layoutY="432.0" onAction="#verFormatoSimce" style="-fx-background-color: #669ef7;" text="Ayuda" textFill="WHITE" />
          </children>
       </Pane>
+      <Pane fx:id="formatoSimce" layoutX="142.0" layoutY="428.0" prefHeight="155.0" prefWidth="502.0" style="-fx-background-color: white; -fx-border-color: #669ef7;" visible="false">
+         <children>
+            <ImageView fitHeight="101.0" fitWidth="500.0" layoutX="1.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/simceEjemplo.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutY="6.0" prefHeight="19.0" prefWidth="500.0" text="Formato para los archivos Simce">
+               <font>
+                  <Font name="Century Gothic" size="15.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="475.0" layoutY="3.0" onAction="#cerrarFormatoSimce" style="-fx-background-color: red;" text="X" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="12.0" layoutY="92.0" prefHeight="40.0" prefWidth="474.0" text="Tener estricta cosideración que el RBD o rbd esté en la columna señalada." wrapText="true">
+               <font>
+                  <Font name="Century Gothic" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="formatoCDD" layoutX="142.0" layoutY="110.0" prefHeight="155.0" prefWidth="502.0" style="-fx-background-color: white; -fx-border-color: #669ef7;" visible="false">
+         <children>
+            <ImageView fitHeight="101.0" fitWidth="500.0" layoutX="1.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/cddEjemplo.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutY="6.0" prefHeight="19.0" prefWidth="500.0" text="Formato para los archivos Categoria de Desempeño">
+               <font>
+                  <Font name="Century Gothic" size="15.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="477.0" layoutY="4.0" onAction="#cerrarFormatoCDD" style="-fx-background-color: red;" text="X" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="12.0" layoutY="92.0" prefHeight="40.0" prefWidth="474.0" text="Tener estricta cosideración que el RBD o rbd esté en la columna señalada." wrapText="true">
+               <font>
+                  <Font name="Century Gothic" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="formatoId" layoutX="142.0" layoutY="269.0" prefHeight="155.0" prefWidth="502.0" style="-fx-background-color: white; -fx-border-color: #669ef7;" visible="false">
+         <children>
+            <ImageView fitHeight="101.0" fitWidth="500.0" layoutX="1.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/indicadoresEjemplo.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutY="6.0" prefHeight="19.0" prefWidth="500.0" text="Formato para los archivos Indicadores">
+               <font>
+                  <Font name="Century Gothic" size="15.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="475.0" layoutY="3.0" onAction="#cerrarFormatoId" style="-fx-background-color: red;" text="X" textFill="WHITE">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="12.0" layoutY="92.0" prefHeight="40.0" prefWidth="474.0" text="Tener estricta cosideración que el RBD o rbd esté en la columna señalada." wrapText="true">
+               <font>
+                  <Font name="Century Gothic" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXButton fx:id="nuevoArchivo" layoutX="14.0" layoutY="34.0" onAction="#nuevoArchivo" prefHeight="41.0" prefWidth="169.0" ripplerFill="WHITE" style="-fx-background-color: #4460b1;" text="Nuevo Archivo" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton contentDisplay="CENTER" layoutX="793.0" layoutY="4.0" onAction="#salir" prefHeight="25.0" prefWidth="25.0" ripplerFill="#ff2d65" text="X" textFill="#c7c7c7">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="763.0" layoutY="4.0" onAction="#minimizar" prefHeight="25.0" prefWidth="25.0" text="_" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="15.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
