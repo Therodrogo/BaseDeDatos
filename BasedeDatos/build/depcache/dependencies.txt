@@ -1,3 +1,6 @@
+||:Modelo.Comparar
+java.lang.Object
+Modelo.Comparar
 ||:basededatos.VistaController
 javafx.fxml.Initializable
 basededatos.VistaController
@@ -23,6 +26,7 @@ javafx.event.ActionEvent
 java.io.ObjectInputStream
 [Ljava.lang.String;
 java.io.IOException
+Modelo.AccionesComparar
 java.io.FileNotFoundException
 java.io.FileOutputStream
 javafx.scene.control.Alert$AlertType
@@ -33,6 +37,20 @@ javafx.stage.FileChooser$ExtensionFilter
 java.lang.Object
 javafx.stage.Stage
 java.lang.String
+||:Modelo.AccionesComparar
+Modelo.Comparar
+[I
+Modelo.AccionesComparar
+java.util.Objects
+java.util.ArrayList
+java.io.PrintStream
+java.lang.System
+java.util.Iterator
+Modelo.Escuela
+java.lang.Object
+Modelo.Indicador
+Modelo.Simce
+java.lang.Integer
 ||:Modelo.AccionesSimce
 org.apache.poi.xssf.usermodel.XSSFRow
 java.lang.StringBuilder

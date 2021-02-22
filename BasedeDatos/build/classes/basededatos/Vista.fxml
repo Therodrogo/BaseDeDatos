@@ -93,6 +93,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
+            <JFXButton fx:id="guardarComparar" layoutX="663.0" layoutY="550.0" onAction="#guardarComparaciones" text="Guardar tus cachetes" textFill="WHITE" />
          </children>
       </Pane>
       <Pane fx:id="formatoSimce" layoutX="142.0" layoutY="428.0" prefHeight="155.0" prefWidth="502.0" style="-fx-background-color: white; -fx-border-color: #669ef7;" visible="false">

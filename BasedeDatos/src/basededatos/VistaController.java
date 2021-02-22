@@ -7,8 +7,12 @@ package basededatos;
 
 
 import Modelo.Acciones;
+import Modelo.AccionesComparar;
+import static Modelo.AccionesComparar.rbdEscuela;
+import static Modelo.AccionesComparar.rbdSimce;
 import Modelo.AccionesIndicador;
 import Modelo.AccionesSimce;
+import Modelo.Comparar;
 import Modelo.Escuela;
 import Modelo.Indicador;
 import Modelo.Principal;
@@ -335,11 +339,13 @@ public class VistaController implements Initializable {
             AccionesSimce acciones = new AccionesSimce ();
             
             for (int i = 0; i < DocumentosSimceNUEVO.size(); i++) {
+                
                 try {
                     ArrayList<Simce> borrar = new ArrayList();
+                    
                     System.out.println(simces.size()+"||||");
                     
-                    acciones.subBuscar(simces, (ArrayList<Simce>)DocumentosSimceNUEVO.get(i));
+                    acciones.subBuscar(simces, (ArrayList<Simce>) DocumentosSimceNUEVO.get(i));
                     acciones.buscarRepetidas(simces,borrar);
                     acciones.borrar(simces, borrar);
                     
@@ -470,6 +476,7 @@ public class VistaController implements Initializable {
         }
     
     }
+    
     ArrayList<Escuela> compararEscuela = new ArrayList();
     ArrayList<Simce> compararSimce = new ArrayList();
     ArrayList<Indicador> compararIndicador = new ArrayList();
@@ -483,8 +490,8 @@ public class VistaController implements Initializable {
             ObjectInputStream entrada3 = new ObjectInputStream(new FileInputStream(nombresDeArchivos.get(2)+".txt"));
 
             compararEscuela =(ArrayList<Escuela>) entrada1.readObject();
-            compararSimce = (ArrayList<Simce>) entrada2.readObject();
-            compararIndicador = (ArrayList<Indicador>) entrada3.readObject();
+            compararIndicador = (ArrayList<Indicador>) entrada2.readObject();
+            compararSimce = (ArrayList<Simce>) entrada3.readObject();
             
             entrada1.close();
             entrada2.close();
@@ -785,26 +792,113 @@ public class VistaController implements Initializable {
 
             FileChooser file = new FileChooser();
             File abre = file.showSaveDialog(null);
-            AccionesSimce accionesSimce = new AccionesSimce();
+            
+            AccionesComparar comparar = new AccionesComparar();
 
             if (!"null".equals(abre.toString())) {
-
+                System.out.println("intenca cargar");
                 cargarTxtComparar(nombresComparar);
+                System.out.println("CArgoooo");
                 
             }
+            System.out.println(compararEscuela.size());
+            System.out.println(compararSimce.size());
+            System.out.println(compararIndicador.size());
+            
+            System.out.println("antes de sacar lista");
+            comparar.sacarListRBD(compararEscuela, compararSimce, compararIndicador);
+            System.out.println("Despudes de sacar lista");
+            
+            ArrayList<ArrayList<Comparar>> documentosComparar = new ArrayList();
+            
+            documentosComparar.add(AccionesComparar.rbdEscuela);
+            documentosComparar.add(AccionesComparar.rbdSimce);
+            documentosComparar.add(AccionesComparar.rbdIndicador);
+            
+            //Borrar Elementos que se repiten
+            
+            ArrayList<Comparar> borrar = new ArrayList();
             
             
+            for (int i = 0; i < documentosComparar.size(); i++) {
+                System.out.println(documentosComparar.get(i));
+                borrarElementoComparar(documentosComparar.get(i),documentosComparar);
+            }
+            
+            System.out.println("Docuemntos size");
+            for (int i = 0; i < 3; i++) {
+                System.out.println(documentosComparar.get(i).size());
+            }
+            
+            //ARmar documentos distintos
+            ArrayList<Escuela> nuevoArchivoEscuela = new ArrayList();
+            nuevoArchivoEscuela = comparar.armarEscuela(documentosComparar.get(0),compararEscuela);
+            
+            ArrayList<Indicador> nuevoArchivoIndicador = new ArrayList();
+            nuevoArchivoIndicador = comparar.armarIndicador(documentosComparar.get(1), compararIndicador);
+            
+            ArrayList<Simce> nuevoArchivoSimce = new ArrayList();
+            nuevoArchivoSimce = comparar.armarSimce(documentosComparar.get(2), compararSimce);
             
             
+            //Exportar Excel
+            
+            Acciones escuela = new Acciones();
+            escuela.exportarExcel(nuevoArchivoEscuela, abre.toString()+nombresComparar.get(0));
+
+            AccionesIndicador indicador = new AccionesIndicador();
+            indicador.exportarExcel(nuevoArchivoIndicador, abre.toString()+nombresComparar.get(1));
+            
+            AccionesSimce simce = new AccionesSimce();
+            simce.exportarExcel(nuevoArchivoSimce, abre.toString()+nombresComparar.get(2));
             
             
+            buttonGuardarIndicador.setDisable(false);
+            elementosComparar.getChildren().clear();
+            nombresComparar.clear();
+            nombreArchivo="";
+            compararEscuela.clear();
+            compararIndicador.clear();
+            compararSimce.clear();
             
+            posI=0;
+            posJ=0;
+
+         
         } catch (Exception e) {
             buttonGuardarIndicador.setDisable(false);
         }
         
     }
-
+    public void borrarElementoComparar(ArrayList<Comparar> simces,ArrayList<ArrayList<Comparar>> DocumentosSimceNUEVO){
+        
+        if (DocumentosSimceNUEVO.size()>=2) {
+            
+            AccionesComparar acciones = new AccionesComparar ();
+            
+            for (int i = 0; i < DocumentosSimceNUEVO.size(); i++) {
+                
+                try {
+                    ArrayList<Comparar> borrar = new ArrayList();
+                    
+                    System.out.println(simces.size()+"||||");
+                    
+                    acciones.subBuscar(simces, (ArrayList<Comparar>) DocumentosSimceNUEVO.get(i));
+                    acciones.buscarRepetidas(simces,borrar);
+                    acciones.borrar(simces, borrar);
+                    
+                } catch (Exception e) {
+                    System.out.println("Borrado completado");
+                }
+                
+            }
+           
+        }
+        else{
+            
+            System.out.println("FALTAN ELEMENTOS");
+        }
+    }
 
     
 }
