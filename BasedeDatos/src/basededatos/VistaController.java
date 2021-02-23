@@ -604,6 +604,43 @@ public class VistaController implements Initializable {
 
     @FXML
     private void salir(ActionEvent event) {
+        
+        for (int i = 0; i < nombresComparar.size(); i++) {
+            File file = new File(nombresComparar.get(i)+".txt");
+            
+            if (file.exists()) {// si el archivo existe se elimina
+                file.delete();
+            } 
+         
+        }
+        
+        for (int i = 0; i < nombresDeArchivos.size(); i++) {
+            File file = new File(nombresDeArchivos.get(i)+".txt");
+            
+            if (file.exists()) {// si el archivo existe se elimina
+                file.delete();
+            } 
+         
+        }
+        
+        for (int i = 0; i < nombresDeArchivosIndicador.size(); i++) {
+            File file = new File(nombresDeArchivosIndicador.get(i)+".txt");
+            
+            if (file.exists()) {// si el archivo existe se elimina
+                file.delete();
+            } 
+         
+        }    
+
+        for (int i = 0; i < nombresDeArchivosSimce.size(); i++) {
+            File file = new File(nombresDeArchivosSimce.get(i)+".txt");
+            
+            if (file.exists()) {// si el archivo existe se elimina
+                file.delete();
+            } 
+         
+        }
+        
         System.exit(0);
         
     }
