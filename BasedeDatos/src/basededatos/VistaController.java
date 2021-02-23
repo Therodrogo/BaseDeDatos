@@ -8,8 +8,6 @@ package basededatos;
 
 import Modelo.Acciones;
 import Modelo.AccionesComparar;
-import static Modelo.AccionesComparar.rbdEscuela;
-import static Modelo.AccionesComparar.rbdSimce;
 import Modelo.AccionesIndicador;
 import Modelo.AccionesSimce;
 import Modelo.Comparar;
@@ -261,8 +259,8 @@ public class VistaController implements Initializable {
     private void mostrarAlertError() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
-        alert.setTitle("Informacion");
-        alert.setContentText("El Archivo ya esta cargado.");
+        alert.setTitle("Información");
+        alert.setContentText("El archivo ya se encuentra cargado, por favor intentar nuevamente");
         alert.showAndWait();
     }
 
@@ -426,8 +424,6 @@ public class VistaController implements Initializable {
 
                 entrada.close();
             } catch (Exception e) {
-                System.out.println(e.getCause());
-                System.out.println("SE CAYP ###21321");
             } 
         }
     
@@ -771,7 +767,7 @@ public class VistaController implements Initializable {
         
         JFXButton boton = new JFXButton(nombre);
         boton.textFillProperty().set(Paint.valueOf("white"));
-        boton.setStyle("-fx-background-color: #5CDB2C;");
+        boton.setStyle("-fx-background-color: #A7A3E3;");
         boton.setPrefWidth(131);
 
         elementosComparar.add(boton, posI, posJ);
@@ -853,7 +849,7 @@ public class VistaController implements Initializable {
             simce.exportarExcel(nuevoArchivoSimce, abre.toString()+nombresComparar.get(2));
             
             
-            buttonGuardarIndicador.setDisable(false);
+            guardarComparar.setDisable(false);
             elementosComparar.getChildren().clear();
             nombresComparar.clear();
             nombreArchivo="";
@@ -866,7 +862,7 @@ public class VistaController implements Initializable {
 
          
         } catch (Exception e) {
-            buttonGuardarIndicador.setDisable(false);
+            guardarComparar.setDisable(false);
         }
         
     }
@@ -898,6 +894,53 @@ public class VistaController implements Initializable {
             
             System.out.println("FALTAN ELEMENTOS");
         }
+    }
+
+    @FXML
+    private void limpiarCDD(ActionEvent event) {
+        elementos.getChildren().clear();
+        Documentos.clear();
+        nombresDeArchivos.clear();
+        PosI=0;
+        PosJ=0;
+
+        PosIS=0;
+        PosJS=0;
+    }
+
+    @FXML
+    private void limpiarIndicador(ActionEvent event) {
+        elementos2.getChildren().clear();
+        DocumentosIndicador.clear();
+        nombresDeArchivosIndicador.clear();
+
+        PosI_ID=0;
+        PosJ_ID=0;
+    }
+
+    @FXML
+    private void limpiarSimce(ActionEvent event) {
+        
+
+        elementos3.getChildren().clear();
+        DocumentosSimce.clear();
+        nombresDeArchivosSimce.clear();
+
+        PosIS=0;
+        PosJS=0;
+    }
+
+    @FXML
+    private void limpiarComparar(ActionEvent event) {
+        elementosComparar.getChildren().clear();
+        nombresComparar.clear();
+        nombreArchivo="";
+        compararEscuela.clear();
+        compararIndicador.clear();
+        compararSimce.clear();
+
+        posI=0;
+        posJ=0;
     }
 
     

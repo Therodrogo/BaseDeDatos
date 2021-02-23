@@ -15,8 +15,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="830.0" style="-fx-background-color: #1f1e24;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="basededatos.VistaController">
    <children>
+      <Label alignment="CENTER" layoutX="9.0" layoutY="23.0" prefHeight="34.0" prefWidth="810.0" text="Analizador de Datos" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="26.0" />
+         </font>
+      </Label>
       <Button layoutX="-52.0" layoutY="-26.0" mnemonicParsing="false" />
-      <Pane layoutX="10.0" layoutY="88.0" prefHeight="646.0" prefWidth="810.0" style="-fx-background-color: #2f2f39;">
+      <Pane layoutX="10.0" layoutY="89.0" prefHeight="646.0" prefWidth="810.0" style="-fx-background-color: #2f2f39;">
          <children>
             <GridPane fx:id="elementos" layoutX="11.0" layoutY="62.0">
               <rowConstraints>
@@ -28,7 +33,7 @@
                   <Font name="Century Gothic" size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="11.0" layoutY="22.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: #3f3f4b;" text="Categoria de Desempeño" textFill="#bdbdbd">
+            <Label alignment="CENTER" layoutX="11.0" layoutY="22.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: #3f3f4b;" text="Categoría de Desempeño" textFill="#bdbdbd">
                <font>
                   <Font name="Century Gothic" size="18.0" />
                </font>
@@ -78,22 +83,57 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </GridPane>
-            <JFXButton buttonType="RAISED" layoutX="702.0" layoutY="120.0" onAction="#verFormatoCDD" style="-fx-background-color: #669ef7;" text="Ayuda" textFill="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="702.0" layoutY="275.0" onAction="#verFormatoId" style="-fx-background-color: #669ef7;" text="Ayuda" textFill="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="702.0" layoutY="432.0" onAction="#verFormatoSimce" style="-fx-background-color: #669ef7;" text="Ayuda" textFill="WHITE" />
-            <Label alignment="CENTER" layoutX="14.0" layoutY="472.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: #3f3f4b;" text="TRYHARDER" textFill="#bdbdbd">
+            <JFXButton buttonType="RAISED" layoutX="739.0" layoutY="120.0" onAction="#verFormatoCDD" style="-fx-background-color: #4460b1;" text="Ayuda" textFill="WHITE" />
+            <JFXButton buttonType="RAISED" layoutX="740.0" layoutY="275.0" onAction="#verFormatoId" style="-fx-background-color: #4460b1;" text="Ayuda" textFill="WHITE" />
+            <JFXButton buttonType="RAISED" layoutX="741.0" layoutY="432.0" onAction="#verFormatoSimce" style="-fx-background-color: #4460b1;" text="Ayuda" textFill="WHITE" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="472.0" prefHeight="30.0" prefWidth="783.0" style="-fx-background-color: #3f3f4b;" text="Comparar archivos por año" textFill="#bdbdbd">
                <font>
                   <Font name="Century Gothic" size="18.0" />
                </font>
             </Label>
-            <JFXButton fx:id="abrirArchivo" layoutX="16.0" layoutY="515.0" onAction="#abrirElemento" style="-fx-background-color: #caca15;" text="Abrir Archivo" textFill="WHITE" />
-            <GridPane fx:id="elementosComparar" layoutX="21.0" layoutY="550.0">
+            <JFXButton fx:id="abrirArchivo" layoutX="689.0" layoutY="523.0" onAction="#abrirElemento" style="-fx-background-color: #4460b1;" text="Abrir Archivo" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font></JFXButton>
+            <GridPane fx:id="elementosComparar" layoutX="21.0" layoutY="552.0">
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <JFXButton fx:id="guardarComparar" layoutX="663.0" layoutY="550.0" onAction="#guardarComparaciones" text="Guardar tus cachetes" textFill="WHITE" />
+            <JFXButton fx:id="guardarComparar" layoutX="613.0" layoutY="561.0" onAction="#guardarComparaciones" prefHeight="42.0" prefWidth="184.0" style="-fx-background-color: #cc3960;" text="Guardar Comparación" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font></JFXButton>
+            <Label layoutX="17.0" layoutY="519.0" text="Orden de los archivos: Categoria de Desempeño || Indicadores || Simce" textFill="WHITE">
+               <font>
+                  <Font name="Century Gothic" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="669.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/basurero.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="21.0" fitWidth="19.0" layoutX="668.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/basurero.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="21.0" fitWidth="19.0" layoutX="669.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/basurero.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="21.0" fitWidth="19.0" layoutX="616.0" layoutY="528.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/basurero.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="662.0" layoutY="119.0" onAction="#limpiarCDD" prefHeight="17.0" prefWidth="32.0" ripplerFill="#fdff94" text=" " textFill="WHITE" />
+            <JFXButton layoutX="661.0" layoutY="276.0" onAction="#limpiarIndicador" prefHeight="17.0" prefWidth="32.0" ripplerFill="#fdff94" text=" " textFill="WHITE" />
+            <JFXButton layoutX="661.0" layoutY="433.0" onAction="#limpiarSimce" prefHeight="17.0" prefWidth="32.0" ripplerFill="#fdff94" text=" " textFill="WHITE" />
+            <JFXButton layoutX="609.0" layoutY="525.0" onAction="#limpiarComparar" prefHeight="17.0" prefWidth="32.0" ripplerFill="#fdff94" text=" " textFill="WHITE" />
          </children>
       </Pane>
       <Pane fx:id="formatoSimce" layoutX="142.0" layoutY="428.0" prefHeight="155.0" prefWidth="502.0" style="-fx-background-color: white; -fx-border-color: #669ef7;" visible="false">
@@ -168,7 +208,7 @@
             </Label>
          </children>
       </Pane>
-      <JFXButton fx:id="nuevoArchivo" layoutX="14.0" layoutY="34.0" onAction="#nuevoArchivo" prefHeight="41.0" prefWidth="169.0" ripplerFill="WHITE" style="-fx-background-color: #4460b1;" text="Nuevo Archivo" textFill="WHITE">
+      <JFXButton fx:id="nuevoArchivo" layoutX="9.0" layoutY="57.0" onAction="#nuevoArchivo" prefHeight="32.0" prefWidth="152.0" ripplerFill="WHITE" style="-fx-background-color: #4C5C8A;" text="Nuevo Archivo" textFill="WHITE">
          <font>
             <Font name="Century Gothic" size="16.0" />
          </font>
